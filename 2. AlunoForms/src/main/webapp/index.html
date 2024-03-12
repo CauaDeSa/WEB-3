@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<meta charset="UTF-8">
+	<title>Pagina principal - Formulário</title>
+	<link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+	<section>
+		<h1>Cadastro de Aluno</h1>
+	
+		<form action="register" method="post">
+			<label for="fullName">Nome completo:</label>
+            <input type="text" name="fullName" id="fullName" required>
+
+            <label for="email">E-mail:</label>
+            <input type="email" name="email" id="email" required>
+            
+            <label for="email">E-mail secundário:</label>
+            <input type="email" name="email" id="email">
+
+            <fieldset>
+            <legend>Informe quais cursos de extensão você gostaria de realizar:</legend>
+                <input type="checkbox" name="options" id="bootstrap" value="Bootstrap">
+                <label for="bootstrap">Bootstrap</label>
+
+                <input type="checkbox" name="options" id="cssAnimations" value="CSS Animations">
+                <label for="cssAnimations">CSS Animations</label>
+
+                <input type="checkbox" name="options" id="designPatterns" value="Design Patterns">
+                <label for="designPatterns">Design Patterns</label>
+            </fieldset>
+            
+            <input type="submit" value="Cadastrar" id="submit">
+		</form>
+	</section>
+</body>
+</html>
