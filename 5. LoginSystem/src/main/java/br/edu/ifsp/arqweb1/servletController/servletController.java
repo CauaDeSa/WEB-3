@@ -27,20 +27,18 @@ public class servletController extends HttpServlet {
         dataset.insert(new User("cauarufinodesa@gmail.com", "12345678910"));
         dataset.insert(new User("igorfilippicardoso@gmail.com", "12345678910"));
         dataset.insert(new User("ednilsonrossi@gmail.com", "12345678910"));
-    }
-	
-	
+    }	
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		PrintWriter write = resp.getWriter();
+		PrintWriter writer = resp.getWriter();
 		String email = req.getParameter("email");
 		String password = req.getParameter("password");
 		
-		if (dataset.validate(dataset.getByEmail(email), password)) {
-			write.println("<h1> Login efetuado com sucesso! </h1>");
+		if (User.autenticate(dataset.getByEmail(email), password)) {
+			loginPage(req, resp, writer);
 		} else {
-			write.println("<h1> Não foi possível efetuar login! </h1>");
+			errorPage(req, resp, writer);
 		}
 	}
 
@@ -49,5 +47,43 @@ public class servletController extends HttpServlet {
 		doGet(req, resp);
 	}
 	
+	private void loginPage(HttpServletRequest req, HttpServletResponse resp, PrintWriter writer) {
+		resp.setContentType("text/html;charset=UTF-8");
+		
+		writer.println("<html>");
+		writer.println("<head>");
+			writer.println("\t<meta charset=\"UTF-8\" >");
+			writer.println("\t<title>Exito ao efetuar login</title>");		
+		writer.println("</head>");
+		
+		writer.println("<body>");
+			writer.println("<section>");
+				writer.println("<h1> Login efetuado com sucesso! </h1>");
+			writer.println("</section>");
+		writer.println("</body>");
+		
+		writer.println("</html>");
+		writer.close();
+	}
 	
+	private void errorPage(HttpServletRequest req, HttpServletResponse resp, PrintWriter writer) {
+		
+		resp.setContentType("text/html;charset=UTF-8");
+		
+		writer.println("<html>");
+		writer.println("<head>");
+			writer.println("\t<meta charset=\"UTF-8\" >");
+			writer.println("\t<title>Erro ao efetuar login</title>");		
+		writer.println("</head>");
+		
+		writer.println("<body>");
+			writer.println("<section>");
+				writer.println("\t<h1>Não foi possível efetuar o login!</h1>");
+				writer.println("\t<a href=\"index.html\" > Página de login </a>");
+			writer.println("</section>");
+		writer.println("</body>");
+		
+		writer.println("</html>");
+		writer.close();
+	}
 }

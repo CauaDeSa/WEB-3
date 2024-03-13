@@ -9,6 +9,10 @@ public class User {
 		this.password = password;
 	}
 
+	public static boolean autenticate(User current, String password) {
+		return current.password.equals(password);
+	}
+	
 	public String getEmail() {
 		return email;
 	}

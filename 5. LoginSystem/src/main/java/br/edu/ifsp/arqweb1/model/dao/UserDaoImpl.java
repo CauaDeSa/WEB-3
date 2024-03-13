@@ -43,15 +43,4 @@ public class UserDaoImpl implements UserDao{
 		}
 		return null;
 	}
-	
-	@Override
-	public boolean validate(User user, String password) {
-		if (user != null) {
-			if (password.equals(user.getPassword())) {
-				return true;
-			}
-		}
-		
-		return false;
-	}
 }

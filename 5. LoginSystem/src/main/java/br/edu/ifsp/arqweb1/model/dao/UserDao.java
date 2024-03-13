@@ -7,6 +7,4 @@ public interface UserDao {
 	boolean insert(User user);
 	
 	User getByEmail(String email);
-
-	boolean validate(User user, String password);
 }
