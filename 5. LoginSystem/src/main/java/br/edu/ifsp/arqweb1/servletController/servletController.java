@@ -53,12 +53,14 @@ public class servletController extends HttpServlet {
 		writer.println("<html>");
 		writer.println("<head>");
 			writer.println("\t<meta charset=\"UTF-8\" >");
-			writer.println("\t<title>Exito ao efetuar login</title>");		
+			writer.println("\t<title>Exito ao efetuar login</title>");	
+			writer.println("\t<link rel=\"stylesheet\" type=\"text/css\" href=\"responsePages.css\">");
 		writer.println("</head>");
 		
 		writer.println("<body>");
 			writer.println("<section>");
 				writer.println("<h1> Login efetuado com sucesso! </h1>");
+				writer.println("<img src=\"./assets/joinha.png\">");
 			writer.println("</section>");
 		writer.println("</body>");
 		
@@ -73,12 +75,14 @@ public class servletController extends HttpServlet {
 		writer.println("<html>");
 		writer.println("<head>");
 			writer.println("\t<meta charset=\"UTF-8\" >");
-			writer.println("\t<title>Erro ao efetuar login</title>");		
+			writer.println("\t<title>Erro ao efetuar login</title>");	
+			writer.println("\t<link rel=\"stylesheet\" type=\"text/css\" href=\"responsePages.css\">");
 		writer.println("</head>");
 		
 		writer.println("<body>");
 			writer.println("<section>");
 				writer.println("\t<h1>Não foi possível efetuar o login!</h1>");
+				writer.println("<img src=\"./assets/sadCat.jpg\">");
 				writer.println("\t<a href=\"index.html\" > Página de login </a>");
 			writer.println("</section>");
 		writer.println("</body>");
