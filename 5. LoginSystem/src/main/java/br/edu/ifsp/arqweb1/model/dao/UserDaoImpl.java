@@ -6,22 +6,22 @@ import java.util.List;
 import br.edu.ifsp.arqweb1.model.User;
 
 public class UserDaoImpl implements UserDao{
-	
+
 	private static UserDaoImpl instance;
     private List<User> userList;
-    
+
     private UserDaoImpl() {
     	userList = new ArrayList<>();
     }
-    
+
     public static UserDaoImpl getInstance() {
     	if (instance == null) {
     		instance = new UserDaoImpl();
     	}
-    	
+
     	return instance;
     }
-    
+
 	@Override
 	public boolean insert(User user) {
 		if(userList != null) {
