@@ -15,7 +15,7 @@ public class UsersWriter {
 	public static Boolean write(User user) {
 		Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateTypeAdapter()).create();
 		List <User> users = UsersReader.read();
-		String path = "C:\\Users\\cauar\\WEB-1\\7. iFitness\\src\\main\\webapp\\data";
+		String path = "C:\\Users\\cauar\\WEB-1\\7. iFitness\\src\\main\\webapp\\localdata\\data";
 		
 		if (users == null) {
 			users = new ArrayList<>();

@@ -17,7 +17,7 @@ public class UsersReader {
 	public static List<User> read(){
 		Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateTypeAdapter()).create();
 		List <User> users = null;
-		String path = "C:\\Users\\cauar\\WEB-1\\7. iFitness\\src\\main\\webapp\\data";
+		String path = "C:\\Users\\cauar\\WEB-1\\7. iFitness\\src\\main\\webapp\\localdata\\data";
 		
 		try {
 			File file = new File(path);

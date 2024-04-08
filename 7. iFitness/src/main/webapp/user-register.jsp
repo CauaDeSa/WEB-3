@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <!doctype html>
 <html lang="pt-BR">
@@ -15,6 +17,18 @@
   </head>
   <body>
   	<div class="container">
+  	
+  			<c:if test="${result == 'notRegistered'}">
+
+				<div class="alert alert-danger alert-dismissible fade show"
+					role="alert">
+					Email já cadastrado. Tente novamente com outro email.
+					<button type="button" class="btn-close" data-bs-dismiss="alert"
+						aria-label="Close"></button>
+				</div>
+
+			</c:if>
+			
 		<div class="col-lg-4 offset-lg-4 col-sm-12">
 	    	<form action="userRegister" method="post" id="form1">
 				<h1 class="text-center mt-5" >Register</h1>

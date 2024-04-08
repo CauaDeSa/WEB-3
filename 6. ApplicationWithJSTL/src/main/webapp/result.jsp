@@ -25,10 +25,10 @@
 				
 				<c:forEach var="person" items="${list}" varStatus="count">
 					<tr>
-						<td>${cont.count}</td>
-						<td>${person.name}</td>
-						<td>${person.CPF}</td>
-						<td>${person.email}</td>
+						<td>${count.count}</td>
+						<td>${person.getName()}</td>
+						<td>${person.getCPF()}</td>
+						<td>${person.getEmail()}</td>
 					</tr>
 				</c:forEach>
 			</table>

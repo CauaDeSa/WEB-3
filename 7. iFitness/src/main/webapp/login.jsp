@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <!doctype html>
 <html lang="pt-BR">
@@ -14,6 +16,27 @@
   </head>
   <body>
   	<div class="container">
+  	
+  				<c:choose>
+					<c:when test="${result == 'notFound'}">
+						<div class="alert alert-danger alert-dismissible fade show"
+							role="alert">
+							Usuário não encontrado! Verifique os dados e tente novamente.
+							<button type="button" class="btn-close" data-bs-dismiss="alert"
+								aria-label="Close"></button>
+						</div>
+					</c:when>
+					<c:when test="${result == 'registered'}">
+		
+						<div class="alert alert-success alert-dismissible fade show"
+							role="alert">
+							Cadrasto realizado com sucesso! Faça login para continuar.
+							<button type="button" class="btn-close" data-bs-dismiss="alert"
+								aria-label="Close"></button>
+						</div>
+		
+					</c:when>
+				</c:choose>
     	<form action="login" method="post">
 			<div class="col-lg-4 offset-lg-4 col-sm-12">
 				<h1 class="text-center mt-5">Login</h1>
