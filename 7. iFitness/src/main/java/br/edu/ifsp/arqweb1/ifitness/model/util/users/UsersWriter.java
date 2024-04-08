@@ -15,11 +15,12 @@ public class UsersWriter {
 	public static Boolean write(User user) {
 		Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateTypeAdapter()).create();
 		List <User> users = UsersReader.read();
-		String path = "C:\\Users\\cauar\\WEB-1\\7. iFitness\\src\\main\\webapp\\localdata\\data";
+		String path = "C:\\Users\\cauar\\WEB-1\\7. iFitness\\src\\main\\webapp\\data.json";
 		
 		if (users == null) {
 			users = new ArrayList<>();
 			user.setId(1L);
+			System.out.println("USERS TA VAZIO");
 		} else {
 			for (User u : users) {
 				if (u.getEmail().equals(user.getEmail()))
@@ -36,6 +37,7 @@ public class UsersWriter {
 		
 		try {
 			FileWriter writer = new FileWriter(path);
+			System.out.println("ABRIU ARQUIVO");
 			writer.write(json);
 			writer.close();
 		} catch(IOException e) {
