@@ -21,5 +21,4 @@ public class UserLogin {
 		
 		throw new Exception("User not found");
 	}
-
 }

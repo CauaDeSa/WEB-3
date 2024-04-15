@@ -16,12 +16,12 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/userRegister")
 public class UserRegisterController extends HttpServlet{
-
+	
+	private static final long serialVersionUID = 1L;
+	
 	public UserRegisterController() {
     	super();
     }
-	
-	private static final long serialVersionUID = 1L;
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -31,13 +31,7 @@ public class UserRegisterController extends HttpServlet{
 		String dateOfBirth = req.getParameter("dateOfBirth");
 		String gender = req.getParameter("gender");
 		
-		User user = new User();
-		
-		user.setName(name);
-		user.setEmail(email);
-		user.setPassword(password);
-		user.setBirthDate(LocalDate.parse(dateOfBirth));
-		user.setGender(Gender.valueOf(gender));
+		User user = new User(name, email, password, LocalDate.parse(dateOfBirth), Gender.valueOf(gender));
 		
 		RequestDispatcher dispatcher = null;
 		

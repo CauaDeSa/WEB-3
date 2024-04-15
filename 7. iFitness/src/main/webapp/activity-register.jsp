@@ -1,7 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 
 <!doctype html>
 <html lang="pt-BR">
@@ -44,12 +44,12 @@
 	    		<h1 class="text-center mt-5" >New activity</h1>
 	    		
 	    		<div class="mb-3">
-					<label for="activityType">Activity tpe*</label>
+					<label for="activityType">Activity type*</label>
 					<select class="form-select" name="activityType" id="activityType" required="required">
 						<option value="" selected>Select</option>
-						<option value="HIKE">hike</option>
+						<option value="RACE">Race</option>
 						<option value="CYCLING">Cycling</option>
-						<option value="HIKE">hike</option>
+						<option value="HIKE">Hike</option>
 						<option value="SWIM">Swim</option>
 					</select>
 				</div>
@@ -60,18 +60,13 @@
 				</div>
 				
 				<div class="mb-3">
-					<label for="distance">Distance) (KM)*</label>
+					<label for="distance">Distance (KM)*</label>
 					<input type="number" name="distance" id="distance" class="form-control" step="0.1" min="0.1" required="required">
 				</div>
 				
 				<div class="mb-3">
 					<label for="duration">Duration (Minutes)*</label>
 					<input type="number" name="duration" id="duration" class="form-control" step="1" min="1" required="required">
-				</div>
-				
-				<div class="mb-3">
-					<label for="confirmPassword">Confirm Password*</label>
-					<input type="password" name="confirmPassword" id="confirmPassword" class="form-control" minlength="6" maxlength="12" required="required">
 				</div>
 				
 				<div class="mb-3">

@@ -15,6 +15,14 @@ public class User implements Serializable {
     private LocalDate birthDate;
     private Gender gender;
 
+    public User(String name, String email, String password, LocalDate birthDate, Gender gender) {
+    	this.name = name;
+    	this.email = email;
+    	this.password = password;
+    	this.birthDate = birthDate;
+    	this.gender = gender;
+    }
+    
     public long getId() {
         return id;
     }

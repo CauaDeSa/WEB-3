@@ -5,17 +5,20 @@ import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.edu.ifsp.arqweb1.ifitness.model.User;
+import br.edu.ifsp.arqweb1.ifitness.model.util.users.PasswordEncoder;
 import br.edu.ifsp.arqweb1.ifitness.model.util.users.UserLogin;
 
-@WebServlet("/activityRegister")
+@WebServlet("/login")
 public class UserLoginController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+	private static final int cookieMaxAge = 7 * (60 * 60 * 24);
 
 	public UserLoginController() {
 		super();
@@ -30,7 +33,13 @@ public class UserLoginController extends HttpServlet {
 
 		try {
 			User user = UserLogin.login(email, password);
+			
+			Cookie cookie = new Cookie("userId", PasswordEncoder.encode(String.valueOf(user.getEmail())));
+			cookie.setMaxAge(cookieMaxAge);
+			
 			req.setAttribute("user", user);
+			resp.addCookie(cookie);
+			
 			dispatcher = req.getRequestDispatcher("/activity-register.jsp");
 		} catch (Exception e) {
 			req.setAttribute("result", "notFound");

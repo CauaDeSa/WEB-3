@@ -17,7 +17,7 @@ public class UsersReader {
 	public static List<User> read(){
 		Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateTypeAdapter()).create();
 		List <User> users = null;
-		String path = "C:\\Users\\cauar\\WEB-1\\7. iFitness\\src\\main\\webapp\\data.json";
+		String path = "C:\\Users\\cauar\\Documents\\Nova pasta\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\7. iFitness\\data\\userData.json";
 		
 		try {
 			File file = new File(path);
@@ -32,5 +32,20 @@ public class UsersReader {
 			e.printStackTrace();
 		}
 		return users;
+	}
+	
+	public static User findUserByEmail(String encryptedEmail) throws Exception {
+
+		List<User> users = read();
+
+		if (users != null) {
+			for (User user : users) {
+				if (PasswordEncoder.encode(user.getEmail()).equals(encryptedEmail)) {
+					return user;
+				}
+			}
+		}
+
+		throw new Exception("User not found");
 	}
 }
