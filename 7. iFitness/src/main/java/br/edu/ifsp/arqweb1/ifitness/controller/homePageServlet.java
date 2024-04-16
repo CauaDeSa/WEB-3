@@ -35,12 +35,9 @@ public class homePageServlet extends HttpServlet {
 		
 			req.setAttribute("userActivities", userActivities);
 			req.setAttribute("name", user.getName());
-			System.out.println("dispatcher!");
 			dispatcher = req.getRequestDispatcher("/homePage.jsp");
-			System.out.println("dispatcher?");
 		} else {
 			Cookie[] cookies = req.getCookies();
-			System.out.println("Oi");
 			if(cookies != null) {
 				
 				for(Cookie c: cookies) {
