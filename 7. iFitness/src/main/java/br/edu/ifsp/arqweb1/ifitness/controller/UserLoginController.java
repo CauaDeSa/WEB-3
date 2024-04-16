@@ -11,14 +11,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.edu.ifsp.arqweb1.ifitness.model.User;
-import br.edu.ifsp.arqweb1.ifitness.model.util.users.PasswordEncoder;
 import br.edu.ifsp.arqweb1.ifitness.model.util.users.UserLogin;
 
 @WebServlet("/login")
 public class UserLoginController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	private static final int cookieMaxAge = 7 * (60 * 60 * 24);
+	private static final int cookieMaxAge = 60 * 60 * 24;
 
 	public UserLoginController() {
 		super();
@@ -29,23 +28,31 @@ public class UserLoginController extends HttpServlet {
 		String email = req.getParameter("email");
 		String password = req.getParameter("password");
 		
+		User user = UserLogin.login(email, password);
 		RequestDispatcher dispatcher = null;
-
-		try {
-			User user = UserLogin.login(email, password);
-			
-			Cookie cookie = new Cookie("userId", PasswordEncoder.encode(String.valueOf(user.getEmail())));
+		
+		if (user != null) {
+			Cookie cookie = new Cookie("loggedUser", email);
 			cookie.setMaxAge(cookieMaxAge);
-			
-			req.setAttribute("user", user);
 			resp.addCookie(cookie);
 			
-			dispatcher = req.getRequestDispatcher("/activity-register.jsp");
-		} catch (Exception e) {
+			req.setAttribute("user", user);
+			dispatcher = req.getRequestDispatcher("/homePageServlet");
+		} else {
+			Cookie[] cookies = req.getCookies();
+			if (cookies != null) {
+				for (Cookie c: cookies) {
+					if (c.getName().equals("loggedUser")) {
+						c.setMaxAge(0);
+						resp.addCookie(c);
+					}
+				}
+			}
+			
 			req.setAttribute("result", "notFound");
 			dispatcher =req.getRequestDispatcher("/login.jsp");
 		}
-		
+
 		dispatcher.forward(req, resp);
 	}
 }

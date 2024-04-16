@@ -16,15 +16,4 @@ public enum ActivityType {
 	public String getDescription() {
 		return description;
 	}
-	
-	public static ActivityType fromString(String description) throws Exception{
-		for (ActivityType activityType : ActivityType.values()) {
-			if (activityType.description.equalsIgnoreCase(description)) {
-				return activityType;
-			}
-		}
-		
-		throw new Exception("Activity type not found");
-	}
-
 }

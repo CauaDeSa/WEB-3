@@ -8,7 +8,7 @@ public class UserLogin {
 
 	private UserLogin() {}
 
-	public static User login(String email, String password) throws Exception {
+	public static User login(String email, String password) {
 		List<User> users = UsersReader.read();
 
 		if (users != null) {
@@ -19,6 +19,6 @@ public class UserLogin {
 			}
 		}
 		
-		throw new Exception("User not found");
+		return null;
 	}
 }

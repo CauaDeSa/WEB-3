@@ -14,15 +14,7 @@ public class Activity implements Serializable {
 	private Double duration;
 	private Double distance;
 	private User user;
-	
-	public Activity(ActivityType type, LocalDate date, Double duration, Double distance, User user) {
-		this.type = type;
-		this.date = date;
-		this.duration = duration;
-		this.distance = distance;
-		this.user = user;
-	}
-	
+
 	public User getUser() {
 		return user;
 	}

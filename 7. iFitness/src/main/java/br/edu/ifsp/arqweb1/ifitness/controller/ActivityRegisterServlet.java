@@ -2,6 +2,8 @@ package br.edu.ifsp.arqweb1.ifitness.controller;
 
 import java.io.IOException;
 import java.time.LocalDate;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -18,7 +20,7 @@ import br.edu.ifsp.arqweb1.ifitness.model.util.users.UsersReader;
 @WebServlet("/activityRegister")
 public class ActivityRegisterServlet extends HttpServlet {
 
-	private static final long serialVersionUID = -5839886053047740115L;
+	private static final long serialVersionUID = 1L;
 	
 	public ActivityRegisterServlet() {
 		super();
@@ -26,47 +28,44 @@ public class ActivityRegisterServlet extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		try {
-	        Activity activity = createActivity(req);
-	        
-			if (ActivityWriter.write(activity)) {
-				req.setAttribute("result", "registered");
-				req.setAttribute("activity", activity);
-			} else {
-				req.setAttribute("result", "notRegistered");
-			}
-			
-		} catch (Exception e) {
-			req.setAttribute("result", "notRegistered");
-			e.printStackTrace();
-		}
+		ActivityType type = ActivityType.valueOf
+				(req.getParameter("activityType"));
+		LocalDate date = LocalDate.parse(req.getParameter("date"));
+		Double distance = 
+				Double.parseDouble(req.getParameter("distance"));
+		Double duration = 
+				Double.parseDouble(req.getParameter("duration"));
 		
-		req.getRequestDispatcher("./activity-register.jsp").forward(req, resp);
-	}
-	
-	private Activity createActivity(HttpServletRequest req) throws Exception {
+		User user = null;
+		Cookie[] cookies = req.getCookies();
 		
-		ActivityType activityType = ActivityType.valueOf(req.getParameter("activityType"));
-        LocalDate date = LocalDate.parse(req.getParameter("date"));
-        Double distance = Double.parseDouble(req.getParameter("distance"));
-        Double duration = Double.parseDouble(req.getParameter("duration"));
-        User user = null;
-        
-        Cookie[] cookies = req.getCookies();
-        
 		if (cookies != null) {
-			try {
-				for (Cookie cookie : cookies) {
-					if (cookie.getName().equals("userId")) {
-						user = UsersReader.findUserByEmail(cookie.getValue());
-					}
-				}
-			} catch (Exception e) {
-				throw new Exception("User not found");
+			for (Cookie c: cookies ) {
+				if (c.getName().equals("loggedUser"))
+					user = UsersReader.findUserByEmail(c.getValue());
 			}
 		}
 		
-		return new Activity(activityType, date, duration, distance, user);
+		RequestDispatcher dispatcher = null;
+		
+		if (user != null) {
+			Activity activity = new Activity();
+			activity.setType(type);
+			activity.setDate(date);
+			activity.setDistance(distance);
+			activity.setDuration(duration);
+			activity.setUser(user);
+			if(ActivityWriter.write(activity)) {
+				req.setAttribute("result", "registered");
+				dispatcher = 
+						req.getRequestDispatcher("/activity-register.jsp");
+			}
+		} else {
+			req.setAttribute("result", "notRegistered");
+			dispatcher = req.getRequestDispatcher("/activity-register.jsp");
+		}
+		
+		
+		dispatcher.forward(req, resp);
 	}
-
 }

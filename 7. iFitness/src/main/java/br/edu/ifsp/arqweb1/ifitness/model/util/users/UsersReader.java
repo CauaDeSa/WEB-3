@@ -34,18 +34,17 @@ public class UsersReader {
 		return users;
 	}
 	
-	public static User findUserByEmail(String encryptedEmail) throws Exception {
+	public static User findUserByEmail(String email) {
 
 		List<User> users = read();
 
-		if (users != null) {
-			for (User user : users) {
-				if (PasswordEncoder.encode(user.getEmail()).equals(encryptedEmail)) {
-					return user;
-				}
+		for (User user : users) {
+			if (user.getEmail().equals(email)) {
+				return user;
 			}
 		}
+		
 
-		throw new Exception("User not found");
+		return null;
 	}
 }
